@@ -8,9 +8,11 @@ spring:
           - Path=/api/productos/**
         filters:
           - StripPrefix=2
+          - EjemploCookie= Mi mensaje personalizado, usuario, PabloPar
       - id: servicio-items
         uri: lb://servicio-items
         predicates:
           - Path=/api/items/**
         filters:
           - StripPrefix=2
+          

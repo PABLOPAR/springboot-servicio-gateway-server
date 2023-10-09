@@ -1,10 +1,15 @@
 package com.formacionbdi.springboot.app.gateway.filters.factory;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.cookie;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.cloud.gateway.filter.OrderedGatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
@@ -20,10 +25,14 @@ public class EjemploGatewayFilterFactory
 	}
 
 	private final Logger logger = LoggerFactory.getLogger(EjemploGatewayFilterFactory.class);
+	
+	
 
 	@Override
 	public GatewayFilter apply(Configuracion config) {
-		return (exchange, chain) -> {
+		return 
+//				new OrderedGatewayFilter(
+				(exchange, chain) -> {
 
 			logger.info("Ejecutando Pre Gateway Filter Factory: " + config.mensaje);
 			return chain.filter(exchange).then(Mono.fromRunnable(() -> {
@@ -34,9 +43,24 @@ public class EjemploGatewayFilterFactory
 				});
 				logger.info("Ejecutando Post Gateway Filter Factory: " + config.mensaje);
 			}));
-
-		};
+									}
+//				,
+//									2 )
+;
 	}
+	
+	
+	@Override
+	public List<String> shortcutFieldOrder() {
+		return Arrays.asList("mensaje", "cookieNombre", "cookieValor");
+	};
+	
+	@Override
+	public String name() {
+		return "EjemploCookie";
+	}
+	
+	
 
 	public static class Configuracion {
 
@@ -68,7 +92,14 @@ public class EjemploGatewayFilterFactory
 			this.cookieNombre = cookieNombre;
 		}
 
-	};
+	}
+
+
+
+
+
+
+
 }
 
 		
