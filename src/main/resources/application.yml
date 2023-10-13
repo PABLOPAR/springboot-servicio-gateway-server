@@ -6,10 +6,7 @@ spring:
         uri: lb://servicio-productos
         predicates:
           - Path=/api/productos/**
-          - Header= token, \d+
-          - Header=Content-Type, application/json
-          - Method=GET, POST
-          - Query=color
+
 
         filters:
           - StripPrefix=2
