@@ -1,6 +1,6 @@
 package com.formacionbdi.springboot.app.gateway.filters.factory;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.cookie;
+
 
 import java.util.Arrays;
 import java.util.List;
