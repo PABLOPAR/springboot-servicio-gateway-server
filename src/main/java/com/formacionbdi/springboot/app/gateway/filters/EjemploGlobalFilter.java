@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class EjemploGlobalFilter implements GlobalFilter, Ordered {
-
+ 
 	private final Logger logger = LoggerFactory.getLogger(EjemploGlobalFilter.class);
 
 	@Override
